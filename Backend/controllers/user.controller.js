@@ -3,33 +3,43 @@ const userService = require('../services/user.service');
 const { validationResult } = require('express-validator');
 const blacklistTokenModel = require('../models/blacklistToken.model');
 
-module.exports.registerUser = async (req, res, next) => {
+module.exports.registerUser = async (req, res) => {
+  try {
     const errors = validationResult(req);
+
     if (!errors.isEmpty()) {
-        return res.status(400).json({ errors: errors.array() });
+      return res.status(400).json({ errors: errors.array() });
     }
 
     const { fullname, email, password } = req.body;
 
-    const isUserAlreadyExist = await userModel.findOne({ email});
+    const isUserAlreadyExist = await userModel.findOne({ email });
 
     if (isUserAlreadyExist) {
-        return res.status(400).json({ message: 'User Already Exist' });
+      return res.status(400).json({ message: "User Already Exist" });
     }
 
     const hashedPassword = await userModel.hashPassword(password);
 
     const user = await userService.creatUser({
-        firstname: fullname.firstname,
-        lastname: fullname.lastname,
-        email,
-        password: hashedPassword
+      firstname: fullname.firstname,
+      lastname: fullname.lastname,
+      email,
+      password: hashedPassword,
     });
 
     const token = user.generateAuthToken();
 
-    res.status(201).json({ token, user });
-}
+    return res.status(201).json({ token, user });
+
+  } catch (error) {
+    console.error("REGISTER ERROR:", error);
+    return res.status(500).json({
+      message: error.message,
+      stack: error.stack
+    });
+  }
+};
 
 module.exports.loginUser = async (req, res, next) => {
     const errors = validationResult(req);
