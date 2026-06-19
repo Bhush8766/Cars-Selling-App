@@ -1,7 +1,7 @@
 import React from 'react';
 import NavbarAfter from '../Components/NavbarAfter'
 import { useNavigate } from 'react-router-dom';
-
+import car2 from "../img/car2.jpg";
 
 const Car2 = () => {
     const navigate = useNavigate();
@@ -15,7 +15,8 @@ const Car2 = () => {
             <NavbarAfter />
       <section class="carssection container" id="carssection">
         <div class="carssection-img">
-            <img src="./src/img/car2.jpg" alt=""/>
+            {/* <img src="./src/img/car2.jpg" alt=""/> */}
+            <img src={car2} alt="Car" />
         </div>
         <div class="carssection-text">
         <div class="box">

@@ -1,5 +1,5 @@
 import React from 'react'
-
+import aboutImg from "../img/about.png";
 
 
 const About = () => {
@@ -8,7 +8,8 @@ const About = () => {
    
         <section class="about container" id="about">
         <div class="about-img">
-            <img src="./src/img/about.png" alt=""/>
+            {/* <img src="./src/img/about.png" alt=""/> */}
+            <img src={aboutImg} alt="About Us" />
         </div>
         <div class="about-text">
             <span>About Us</span>
