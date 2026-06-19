@@ -3,6 +3,7 @@ import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
 import { userDataContext } from "../context/userContext";
 import Navbar from "../Components/Navbar";
+import c4 from "../img/c4.png";
 
 const userRegister = () => {
   const [firstName, setFirstName] = useState("");
@@ -49,7 +50,8 @@ const userRegister = () => {
       
       <div className="RegisterForm">
       <center>
-     <img src="./src/img/c4.png" alt="Car Logo" />
+     {/* <img src="./src/img/c4.png" alt="Car Logo" /> */}
+     <img src={c4} alt="Car" />
      </center>
         <div>
           <form
